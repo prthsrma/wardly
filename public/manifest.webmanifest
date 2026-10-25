@@ -1,0 +1,12 @@
+{
+  "name": "Wardly",
+  "short_name": "Wardly",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffe17c",
+  "theme_color": "#ffe17c",
+  "icons": [
+    { "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml" },
+    { "src": "/icon-lime.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "maskable" }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "_note": "Clip library index (PRD F2.5). List recorded clip keys per language; files live at /audio/{lang}/{key}.mp3. Empty lists fall back to speechSynthesis, then captions.",
+  "en": [],
+  "hi": [],
+  "ur": [],
+  "doi": [],
+  "ks": []
+}
