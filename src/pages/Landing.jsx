@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Ticket, Navigation, Search, Siren, Languages, Accessibility, Route, MapPin, ScanLine, BellRing, LayoutDashboard, Check, X,
-  Users, Stethoscope, Building2, Mail, Globe, Phone, MessageCircle, ArrowRight, Activity, Sparkles,
+  Users, Stethoscope, Building2, Mail, Globe, Phone, MessageCircle, ArrowRight, Activity,
 } from 'lucide-react';
 import { Brand } from '../components.jsx';
 import { LANGS, DEPARTMENTS } from '../../shared/hospital.js';
@@ -41,7 +41,6 @@ export default function Landing() {
     <>
       <section className="hero dots">
         <div className="wrap center">
-          <span className="pill"><Sparkles size={14} aria-hidden="true" />NEW · Works with ABDM Scan &amp; Share · ₹0 to run</span>
           {english
             ? <h1>One token. Every counter. <span className="outline">Your language.</span></h1>
             : <h1>{t('heroTitle')}</h1>}
@@ -228,7 +227,7 @@ export default function Landing() {
         <div className="wrap footer-grid">
           <div>
             <Brand onDark />
-            <p className="mt" style={{ maxWidth: 360 }}>Smart queue and accessible navigation for government hospital OPDs. Prototype by Team NovoCore, MIET Jammu. All hospital data is simulated.</p>
+            <p className="mt" style={{ maxWidth: 360 }}>Smart queue and accessible navigation for government hospital OPDs. Prototype by Team Bugs &amp; Byte, MIET Jammu. All hospital data is simulated.</p>
             <div className="social">
               <a href="mailto:team@example.org" aria-label="Email"><Mail size={18} aria-hidden="true" /></a>
               <a href="/" aria-label="Website"><Globe size={18} aria-hidden="true" /></a>
