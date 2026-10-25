@@ -84,7 +84,7 @@ export function SafetyDock({ showHelp = true }) {
   const [sent, setSent] = useState(null);
   const send = async () => {
     const v = store.get('ms-visit');
-    const r = await sendAlert({ kind: 'HELP', token: v?.token, nodeId: store.get('ms-loc'), source: 'PHONE' }).catch(() => 'sent');
+    const r = await sendAlert({ kind: 'HELP', token: v?.token, nodeId: store.get('ms-loc'), source: 'PHONE' }).catch(() => 'queued'); // never claim staff were told when the flag did not arrive
     setSent(r); setAsk(false);
   };
   return (

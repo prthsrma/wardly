@@ -1,0 +1,15 @@
+# One-click deploy on Render (free plan): Dashboard → New → Blueprint → pick this repo.
+# Wardly needs a long-running Node server (Express + Socket.IO, in-memory state), so static hosts like Vercel alone can't run the API.
+services:
+  - type: web
+    name: wardly
+    runtime: node
+    plan: free
+    buildCommand: npm ci --include=dev && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/stats
+    envVars:
+      - key: NODE_VERSION
+        value: "20"
+      - key: WARDLY_SECRET
+        generateValue: true

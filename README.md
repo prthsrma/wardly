@@ -85,6 +85,20 @@ Optional environment variables:
 
 No API keys or paid services are needed.
 
+## Deploy online (free)
+
+Wardly is one Node.js app: the same server serves the web pages **and** the API, staff login, live queues and Socket.IO real-time updates, with the simulated hospital data loaded from `shared/hospital.js` at start-up. It needs a host that keeps a Node server running.
+
+**Render (recommended, free):**
+
+1. Sign in at [render.com](https://render.com) with GitHub.
+2. **New → Blueprint**, pick this repository. Render reads [`render.yaml`](render.yaml) and sets everything up (build, start, health check, a generated `WARDLY_SECRET`).
+3. Wait for the first deploy, then open the `https://wardly-….onrender.com` URL.
+
+The free plan sleeps after 15 minutes without visitors; open the URL a minute before a demo, and keep the `/board` tab open to keep it awake. Data resets when it sleeps or redeploys.
+
+> **Vercel / Netlify / GitHub Pages** only serve the static web pages, so the homepage loads but registration, staff login and live updates cannot work there (the page explains this instead of failing silently). Use Render, Railway, Fly.io or any VPS that runs `npm start`.
+
 ## Demo guide
 
 Staff demo accounts (prototype only) are listed on the `/staff` login page — tap one to sign in. Open each role in its own browser tab to see real-time updates.

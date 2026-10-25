@@ -18,7 +18,9 @@ export async function api(path, { method = 'GET', body, auth } = {}) {
   if (auth) headers.Authorization = `Bearer ${auth}`;
   const res = await fetch(`/api${path}`, { method, headers, body: body ? JSON.stringify(body) : undefined });
   const json = await res.json().catch(() => ({}));
-  if (!res.ok) { const e = new Error(json.error?.message || `Request failed (${res.status})`); e.code = json.error?.code; e.data = json.error; e.status = res.status; throw e; }
+  // A 404 without our JSON error means the page is on a static-only host with no Wardly server behind it.
+  const noServer = !json.error && [404, 405].includes(res.status);
+  if (!res.ok) { const e = new Error(json.error?.message || (noServer ? 'The Wardly server is not running on this site. This page is static-only (for example on Vercel); deploy the full app on Render, see the README.' : `Request failed (${res.status})`)); e.code = json.error?.code; e.data = json.error; e.status = res.status; e.noServer = noServer; throw e; }
   return json;
 }
 
@@ -27,7 +29,7 @@ const OUTBOX = 'ms-outbox';
 export async function sendAlert(body) {
   try { await api('/alerts', { method: 'POST', body }); return 'sent'; }
   catch (e) {
-    if (e.status) throw e; // server answered with an error: not a network problem
+    if (e.status && !e.noServer) throw e; // the server answered with an error: not a network problem
     store.set(OUTBOX, [...store.get(OUTBOX, []), { ...body, queuedAt: Date.now() }]);
     return 'queued';
   }
@@ -36,7 +38,7 @@ async function flushOutbox() {
   const q = store.get(OUTBOX, []);
   if (!q.length) return;
   const left = [];
-  for (const a of q) { try { await api('/alerts', { method: 'POST', body: a }); } catch (e) { if (!e.status) left.push(a); } }
+  for (const a of q) { try { await api('/alerts', { method: 'POST', body: a }); } catch (e) { if (!e.status || e.noServer) left.push(a); } }
   store.set(OUTBOX, left);
 }
 setInterval(flushOutbox, 5000);
