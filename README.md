@@ -9,7 +9,7 @@ Smart queue management and accessible navigation for government hospital OPDs.</
 
 <p align="center">
   Hackcache · Smart Queue Management and Accessible Navigation for Government Hospitals<br/>
-  Team NovoCore, MIET Jammu · Working prototype with simulated hospital data · ₹0 to run
+  Team Bugs &amp; Byte, MIET Jammu · Working prototype with simulated hospital data · ₹0 to run
 </p>
 
 ---
